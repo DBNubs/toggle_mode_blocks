@@ -3,3 +3,9 @@ toggle_dark_mode:
     js/dark-mode-toggle.js: {}
   dependencies:
     - core/jquery.cookie
+
+toggle_reduce_motion:
+  js:
+    js/reduce-motion-toggle.js: {}
+  dependencies:
+    - core/jquery.cookie

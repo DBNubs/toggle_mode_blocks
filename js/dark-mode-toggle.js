@@ -4,7 +4,7 @@
       // Trigger to control modes
       var $darkmode = false;
       if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        $('body').once().addClass('dark-mode');
+        $('body').addClass('dark-mode');
         $('.toggle-dark-mode').text('Light Mode');
         $darkmode = true;
       } else {
