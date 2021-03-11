@@ -1,29 +1,42 @@
 (function ($, Drupal) {
   Drupal.behaviors.toggle_reduce_motion = {
     'attach': function(contenxt, settings) {
-      // Trigger to control modes
-      var $reducemotion = false;
-      if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        $('body').addClass('reduce-motion');
-        $('.toggle-reduce-motion').text('Allow Motion');
-        $reducemotion = true;
-      } else {
-        $('body').once().addClass('allow-motion');
-        $('.toggle-reduce-motion').text('Reduce Motion');
-        $reducemotion = false;
+      // set storage
+      if (window.matchMedia &&
+          window.matchMedia('(prefers-reduced-motion: reduce)').matches
+          && sessionStorage.getItem('reducemotion') != 'allow-motion') {
+        sessionStorage.setItem('reducemotion', 'reduce-motion');
+      } else if (window.matchMedia &&
+          window.matchMedia('(prefers-reduced-motion: no-preference)').matches
+          && sessionStorage.getItem('reducemotion') != 'reduce-motion') {
+        sessionStorage.setItem('reducemotion', 'allow-motion');
       }
 
+      // Trigger to control modes
+      if (sessionStorage.getItem('reducemotion') != 'allow-motion') {
+        $('body').addClass('reduce-motion');
+        $('.toggle-reduce-motion').text('Allow Motion');
+        sessionStorage.setItem('reducemotion', 'reduce-motion');
+      }
+
+      if (sessionStorage.getItem('reducemotion') != 'reduce-motion') {
+        $('body').addClass('allow-motion');
+        $('.toggle-reduce-motion').text('Reduce Motion');
+        sessionStorage.setItem('reducemotion', 'allow-motion');
+      }
+
+      // Click triggers
       $('.toggle-reduce-motion').click(function() {
-        if($reducemotion == false) {
+        if(sessionStorage.getItem('reducemotion') == 'allow-motion') {
           $(this).text('Allow Motion');
           $('body').addClass('reduce-motion');
           $('body').removeClass('allow-motion');
-          $reducemotion = true;
+          sessionStorage.setItem('reducemotion', 'reduce-motion');
         } else {
           $(this).text('Reduce Motion');
           $('body').addClass('allow-motion');
           $('body').removeClass('reduce-motion');
-          $reducemotion = false;
+          sessionStorage.setItem('reducemotion', 'allow-motion');
         }
       });
     }
