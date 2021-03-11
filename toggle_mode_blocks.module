@@ -1,0 +1,13 @@
+<?php
+
+/**
+ * Implements hook_theme().
+ */
+function toggle_mode_blocks_theme() {
+  return [
+    'toggle_dark_mode_block' => [
+      'variables' => [],
+      'template' => 'toggle-dark-mode-block',
+    ],
+  ];
+}

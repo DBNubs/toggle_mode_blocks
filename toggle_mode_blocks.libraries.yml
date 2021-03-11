@@ -1,0 +1,5 @@
+toggle_dark_mode:
+  js:
+    js/dark-mode-toggle.js: {}
+  dependencies:
+    - core/jquery.cookie

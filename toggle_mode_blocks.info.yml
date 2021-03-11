@@ -1,0 +1,6 @@
+name: 'Toggle Mode Blocks'
+type: module
+description: 'Toggle modes such as dark/light and reduce motion based on switch or browser settings'
+core: 8.x
+core_version_requirement: ^8 || ^9
+package: 'Custom'
